@@ -6,7 +6,7 @@ import './main.html';
 Template.messageList.onCreated(function () {
   const instance = this;
 });
-
+//a
 Template.messageList.helpers({
   messages() {
     return Messages.find();
