@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Messages } from '/shared/messages.js';
@@ -5,28 +6,56 @@ import './main.html';
 
 Template.messageList.onCreated(function () {
   const instance = this;
+  instance.subscribe('messages');
 });
-//a
+
 Template.messageList.helpers({
   messages() {
     return Messages.find();
   },
 });
 
-Template.messageList.events({
-  'click button'(event, instance) {
-    const newVal = instance.counter.get() + 1;
-    instance.counter.set(newVal);
-  },
+
+
+
+Template.messageInput.onCreated(function () {
+  const instance = this;
+  instance.hasValue = new ReactiveVar(false);
 });
 
+Template.messageInput.helpers({
+  disabled(){
+    const instance = Template.instance();
+    if(instance.hasValue.get()){
+      return '';
+    }else{
+      return 'disabled';
+    }
+  }
+})
+
 Template.messageInput.events({
+  'keyup input'(event, instance){
+    const value = event.target.value;
+    if(value){
+      instance.hasValue.set(true);
+    } else{
+      instance.hasValue.set(false);
+    }
+  },
   'submit form'(event, instance) {
     event.preventDefault();
     const input = instance.find('input');
     const text = input.value;
-    Messages.insert({text: text});
     input.value = '';
-
+    const message = {text: text};
+    Meteor.call("addMessage", message, function(error, result){
+      if(error){
+        console.log(error);
+        alert(error.reason);
+      }else{
+        console.log(result);
+      }
+    });
   },
 });
