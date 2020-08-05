@@ -23,8 +23,10 @@ Template.messageList.events({
 Template.messageInput.events({
   'submit form'(event, instance) {
     event.preventDefault();
-    const text = instance.find('input').value;
+    const input = instance.find('input');
+    const text = input.value;
     Messages.insert({text: text});
+    input.value = '';
 
   },
 });
