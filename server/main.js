@@ -6,5 +6,11 @@ Meteor.startup(() => {
   if (messageCount === 0) {
     Messages.insert({text: "test"});
   }
+  
   console.log(Messages.find().fetch())
 });
+
+Meteor.publish('messages', function () {
+  return Messages.find({});
+});
+
