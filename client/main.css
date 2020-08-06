@@ -1,4 +1,66 @@
+html {
+  height: 100%;
+}
+
 body {
-  padding: 10px;
+  height: 100%;
+  overflow: hidden;
   font-family: sans-serif;
+}
+
+.message-list-wrapper {
+  position: absolute;
+  bottom: 50px;
+}
+
+.no-border {
+  border: none;
+}
+
+.full-height {
+  height: 100%
+}
+
+.full-width {
+  width: 100%;
+}
+
+.pin-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.blurple {
+  background-color: #7289da;
+}
+
+.full-white {
+  background-color: #ffffff;
+}
+
+.greyple {
+  background-color: #99AAB5 !important;
+}
+
+.dbnb {
+  background-color: #2C2F33;
+}
+
+.nqb {
+  background-color: #23272A;
+}
+
+.black {
+  background-color: #000000;
+}
+
+.white-text {
+  color: #ffffff !important;
+}
+
+.p-10 {
+  padding: 10px;
+}
+.m-0 {
+  margin: 0 !important;
 }
