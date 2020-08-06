@@ -1,61 +1,25 @@
 import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Messages } from '/shared/messages.js';
+import 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import './messageInput/messageInput.js'; 
+import './messageList/messageList.js';
 import './main.html';
 
-Template.messageList.onCreated(function () {
-  const instance = this;
-  instance.subscribe('messages');
-});
+Meteor.startup(function(){
+  Meteor.call('getConnectionId', function(error, userInfo){
+    if(!Meteor.userId()){
+      Accounts.createUser({username: userInfo.username, password: userInfo.connectionId})
 
-Template.messageList.helpers({
-  messages() {
-    return Messages.find();
-  },
-});
-
-
-
-
-Template.messageInput.onCreated(function () {
-  const instance = this;
-  instance.hasValue = new ReactiveVar(false);
-});
-
-Template.messageInput.helpers({
-  disabled(){
-    const instance = Template.instance();
-    if(instance.hasValue.get()){
-      return '';
-    }else{
-      return 'disabled';
     }
-  }
-})
+  })
+});
 
-Template.messageInput.events({
-  'keyup input'(event, instance){
-    const value = event.target.value;
-    if(value){
-      instance.hasValue.set(true);
-    } else{
-      instance.hasValue.set(false);
-    }
-  },
-  'submit form'(event, instance) {
-    event.preventDefault();
-    const input = instance.find('input');
-    const text = input.value;
-    input.value = '';
-    const message = {text: text};
-    Meteor.call("addMessage", message, function(error, result){
-      if(error){
-        console.log(error);
-        alert(error.reason);
-      }else{
-        console.log(result);
-      }
-    });
+Meteor.subscribe('users');
+
+
+Template.userList.helpers({
+  users() {
+    return Meteor.users.find();
   },
 });

@@ -1,22 +1,35 @@
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>chat</title>
 </head>
 
 <body>
 
-  {{> messageList}}
-  {{> messageInput}}
+    <div class="row full-height">
+      <div class="col-3 nqb">
+        {{> userList}}
+      </div>
+      <div class="col-9 dbnb">
+        <div class="row p-10 message-list-wrapper">
+          <div class="col">
+            {{> messageList}}
+          </div>
+        </div>
+        <div class="row pin-bottom full-width p-10">
+          {{> messageInput}}
+        </div>
+      </div>
+    </div>
+
+  
 </body>
 
-<template name="messageList">
-  {{#each messages}}
-  <div>{{text}}</div>
+<template name="userList">
+  {{#each users}}
+  <div class="white-text row m-0">{{username}}</div>
   {{/each}}
 </template>
 
-<template name="messageInput">
-  <form>
-    <input type="text">
-    <button {{disabled}} type="submit">Send</button>
-  </form>
-</template>
+
+
+
