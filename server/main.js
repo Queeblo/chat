@@ -5,16 +5,16 @@ import { Accounts } from 'meteor/accounts-base';
 Meteor.startup(() => {
   const messageCount = Messages.find().count();
   if (messageCount === 0) {
-    Messages.insert({text: "test"});
+    //Messages.insert({text: "test"});
   }
-  
-  console.log(Messages.find().fetch())
+  // Messages.remove({})
+  //console.log(Messages.find().fetch())
 });
 
 Meteor.onConnection(function(connection){
-  console.log(connection);
+  //console.log(connection);
   connection.onClose(function(){
-    console.log(connection.id)
+    //console.log(connection.id)
   })
 });
 
