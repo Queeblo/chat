@@ -1,5 +1,23 @@
 <template name="messageList">
     {{#each messages}}
-    <div class="white-text row">{{text}}</div>
+    <div class="white-text row m-0 border-top p-10">
+      <div class="white-text row m-0">
+        <div class="dropdown dropleft" style="position:absolute; right: 20px;">
+          <button class="btn btn-secondary dbnb no-border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="material-icons" >more_vert</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        
+        {{username}}&nbsp;<span class="greyple-text sm-text">{{formatDate}}</span>
+      </div>
+      <div class="white-text row m-0">
+        {{text}}
+      </div>
+    </div>
     {{/each}}
   </template>
