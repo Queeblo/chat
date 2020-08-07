@@ -8,8 +8,8 @@ Meteor.methods({
         if(!message || message.text === ''){
             throw new Meteor.Error('pants-not-found', "Can't find my pants");
         } 
-        console.log(typeof message.text);
+        //console.log(typeof message.text);
         const id = Messages.insert(message);
-        console.log(`addMessage: ${id} ${message.text}`);
+        console.log(`addMessage: ${message.userId} ${message.text}`);
     }
 });
