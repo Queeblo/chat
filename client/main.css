@@ -1,3 +1,7 @@
+:root {
+  --greyple: #99AAB5;
+}
+
 html {
   height: 100%;
 }
@@ -14,7 +18,15 @@ body {
 }
 
 .no-border {
-  border: none;
+  border: none !important;
+}
+
+.no-border:focus {
+  box-shadow: none !important;
+}
+
+.border-top {
+  border-top: 1px solid var(--greyple);
 }
 
 .full-height {
@@ -39,11 +51,11 @@ body {
 }
 
 .greyple {
-  background-color: #99AAB5 !important;
+  background-color: var(--greyple) !important;
 }
 
 .dbnb {
-  background-color: #2C2F33;
+  background-color: #2C2F33 !important;
 }
 
 .nqb {
@@ -56,6 +68,14 @@ body {
 
 .white-text {
   color: #ffffff !important;
+}
+
+.greyple-text {
+  color: var(--greyple);
+}
+
+.sm-text {
+  font-size: .8rem;
 }
 
 .p-10 {
