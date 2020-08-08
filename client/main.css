@@ -37,6 +37,10 @@ body {
   width: 100%;
 }
 
+.flex {
+  display: flex !important;
+}
+
 .pin-bottom {
   position: absolute;
   bottom: 0;

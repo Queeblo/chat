@@ -23,3 +23,10 @@ Template.messageList.onCreated(function () {
       return moment(message.date).format('ddd MMM Do h:mm A')
     }
   });
+
+  Template.messageList.events({
+    'click [data-delete-message]'(event, instance){
+      const message = this;
+      Meteor.call('removeMessage', message._id)
+    },
+  });
