@@ -5,9 +5,19 @@
 </head>
 
 <body>
-
+    <!--{{> loginButtons}}-->
     <div class="row full-height">
       <div class="col-3 nqb">
+       <!-- Button trigger modal -->
+      
+        {{#if registered}}
+          Registered
+          {{else}}
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Sign Up
+          </button>
+        {{/if}}
+
         {{> userList}}
       </div>
       <div class="col-9 dbnb">
@@ -21,8 +31,7 @@
         </div>
       </div>
     </div>
-
-  
+  {{> modal}}
 </body>
 
 <template name="userList">

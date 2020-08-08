@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import {Messages} from '/shared/messages.js';
+import { Messages } from '/shared/messages.js';
 import { Accounts } from 'meteor/accounts-base';
 
 Meteor.startup(() => {
@@ -35,5 +35,5 @@ Meteor.publish('messages', function () {
 });
 
 Meteor.publish('users', function(){
-  return Meteor.users.find({});
+  return Meteor.users.find({}, {fields: {services: 0}});
 });
