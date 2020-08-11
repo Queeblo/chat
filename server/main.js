@@ -27,6 +27,14 @@ Meteor.methods({
       connectionId: connectionId
 
     };
+  },
+  register(data){
+    console.log(data);
+    const userId = this.userId;
+    if(userId){
+      Accounts.setUsername(userId, data.username);
+      Accounts.setPassword(userId, data.password);
+    }
   }
 })
 
