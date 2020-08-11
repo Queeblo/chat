@@ -3,9 +3,10 @@ import { Accounts } from 'meteor/accounts-base'
 import 'popper.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+import './signUp/signUp.js';
 import './messageInput/messageInput.js'; 
 import './messageList/messageList.js';
-import './modal/modal.js';
+import { Modal } from './modal/modal.js';
 import './main.html';
 
 Accounts.ui.config({
@@ -15,7 +16,7 @@ Accounts.ui.config({
 Meteor.startup(function(){
   Meteor.call('getConnectionId', function(error, userInfo){
     if(!Meteor.userId()){
-      Accounts.createUser({username: userInfo.username, password: userInfo.connectionId})
+      //Accounts.createUser({username: userInfo.username, password: userInfo.connectionId})
 
     }
   })
@@ -40,3 +41,9 @@ Template.body.helpers({
     }
   }
 });
+
+Template.body.events({
+  'click [data-sign-up]'(event, instance){
+    Modal.open("signUp");
+  }
+})
