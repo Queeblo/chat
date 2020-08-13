@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Messages } from '/shared/messages.js';
 import { Accounts } from 'meteor/accounts-base';
+import '../shared/accounts.js';
 
 Meteor.startup(() => {
   const messageCount = Messages.find().count();
