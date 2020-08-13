@@ -48,6 +48,10 @@ body {
   bottom: 0;
 }
 
+.no-wrap {
+  flex-wrap: nowrap !important;
+}
+
 .blurple {
   background-color: #7289da;
 }
@@ -65,7 +69,7 @@ body {
 }
 
 .nqb {
-  background-color: #23272A;
+  background-color: #23272A !important;
 }
 
 .black {
@@ -82,6 +86,10 @@ body {
 
 .sm-text {
   font-size: .8rem;
+}
+
+.pb-5 {
+  padding-bottom: 5px !important;
 }
 
 .p-10 {

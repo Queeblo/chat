@@ -5,22 +5,13 @@
 </head>
 
 <body>
-    <!--{{> loginButtons}}-->
     <div class="row full-height">
       <div class="col-3 nqb">
-       <!-- Button trigger modal -->
-      
-        {{#if currentUser}}
-          Registered
-          {{else}}
-          <button data-sign-up type="button" class="btn btn-primary">
-            Sign Up
-          </button>
-        {{/if}}
-
         {{> userList}}
+        {{> currentUserListItem}}
       </div>
       <div class="col-9 dbnb">
+      {{#if currentUser}}
         <div class="row p-10 message-list-wrapper full-width">
           <div class="col">
             {{> messageList}}
@@ -29,6 +20,10 @@
         <div class="row pin-bottom full-width p-10">
           {{> messageInput}}
         </div>
+      {{else}}
+        {{> signUp}}
+      {{/if}}
+        
       </div>
     </div>
   {{> modal}}
