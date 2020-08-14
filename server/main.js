@@ -58,10 +58,10 @@ Meteor.publish('channels', function () {
   return Channels.find({});
 });
 
-// Accounts.onCreateUser((options, user) => {
-//   const defaultChannel = Channels.findOne({name: "General"});
-//   user.profile = {
-//     activeChannel: defaultChannel._id,
-//   };
-//   return user;
-// });
+Accounts.onCreateUser((options, user) => {
+  const defaultChannel = Channels.findOne({name: "General"});
+  user.profile = {
+    activeChannel: defaultChannel._id,
+  };
+  return user;
+});

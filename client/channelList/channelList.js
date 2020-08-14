@@ -26,13 +26,13 @@ Template.channelList.onCreated(function () {
         const profile = {
             activeChannel: channel._id
         };
-    //   Meteor.call("updateUserActiveChannel", profile, function(error, result){
-    //     if(error){
-    //       console.log(error);
-    //       alert(error.reason);
-    //     }else{
-    //       console.log(result);
-    //     }
-    //   });
+      Meteor.call("updateUserProfile", profile, function(error, result){
+        if(error){
+          console.log(error);
+          alert(error.reason);
+        }else{
+          console.log(result);
+        }
+      });
     },
   });
