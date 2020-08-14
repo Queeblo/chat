@@ -1,22 +1,29 @@
 import { Meteor } from 'meteor/meteor';
 import { Messages } from '/shared/messages.js';
+import { Channels } from '../shared/channels.js';
 import { Accounts } from 'meteor/accounts-base';
 import '../shared/accounts.js';
 
+const defaultChannels = [
+  {
+      name: "General"
+  },
+  {
+      name: "Off-Topic"
+  }
+];
+
 Meteor.startup(() => {
-  const messageCount = Messages.find().count();
-  if (messageCount === 0) {
-    //Messages.insert({text: "test"});
+  const channelCount = Channels.find().count();
+  if (channelCount === 0) {
+      defaultChannels.forEach(function(channel){
+          console.log(channel);
+          Channels.insert(channel);
+      });
+    
   }
   // Messages.remove({})
-  //console.log(Messages.find().fetch())
-});
-
-Meteor.onConnection(function(connection){
-  //console.log(connection);
-  connection.onClose(function(){
-    //console.log(connection.id)
-  })
+  console.log(Channels.find().fetch())
 });
 
 Meteor.methods({
@@ -46,3 +53,15 @@ Meteor.publish('messages', function () {
 Meteor.publish('users', function(){
   return Meteor.users.find({}, {fields: {services: 0}});
 });
+
+Meteor.publish('channels', function () {
+  return Channels.find({});
+});
+
+// Accounts.onCreateUser((options, user) => {
+//   const defaultChannel = Channels.findOne({name: "General"});
+//   user.profile = {
+//     activeChannel: defaultChannel._id,
+//   };
+//   return user;
+// });

@@ -1,0 +1,9 @@
+<template name="channelList">
+    <div class="list-group">
+        {{#each channels}}
+            <button data-channel type="button" class="list-group-item list-group-item-action btn-sm {{active}}">
+                {{name}}
+            </button>
+        {{/each}}   
+    </div>
+</template>
