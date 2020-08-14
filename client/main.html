@@ -6,11 +6,11 @@
 
 <body>
     <div class="row full-height">
-      <div class="col-3 nqb">
-        {{> userList}}
+      <div class="col-2 nqb">
+        {{> channelList}}
         {{> currentUserListItem}}
       </div>
-      <div class="col-9 dbnb">
+      <div class="col-8 dbnb">
       {{#if currentUser}}
         <div class="row p-10 message-list-wrapper full-width">
           <div class="col">
@@ -25,15 +25,14 @@
       {{/if}}
         
       </div>
+      <div class="col-2 nqb">
+        {{> userList}}
+      </div>
     </div>
   {{> modal}}
 </body>
 
-<template name="userList">
-  {{#each users}}
-  <div class="white-text row m-0">{{username}}</div>
-  {{/each}}
-</template>
+
 
 
 
