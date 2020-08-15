@@ -6,7 +6,12 @@ import './messageList.html';
 
 Template.messageList.onCreated(function () {
     const instance = this;
-    instance.subscribe('messages');
+    instance.autorun(() => {
+      const user = Meteor.user();
+      instance.subscribe('messages', user.profile.activeChannel);
+    });
+    
+
   });
   
   Template.messageList.helpers({

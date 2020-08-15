@@ -34,11 +34,13 @@ Template.messageInput.onCreated(function () {
       const input = instance.find('input');
       const text = input.value;
       const date = new Date();
+      const user = Meteor.user();
       input.value = '';
       const message = {
         text: text,
         userId: Meteor.userId(),
         date: date.toISOString(),
+        channelId: user.profile.activeChannel
       };
       Meteor.call("addMessage", message, function(error, result){
         if(error){

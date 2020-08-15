@@ -46,8 +46,8 @@ Meteor.methods({
   }
 })
 
-Meteor.publish('messages', function () {
-  return Messages.find({});
+Meteor.publish('messages', function (channelId) {
+  return Messages.find({channelId: channelId});
 });
 
 Meteor.publish('users', function(){
