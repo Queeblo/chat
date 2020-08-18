@@ -1,3 +1,4 @@
+import { Blaze } from 'meteor/blaze'
 import './userList.html';
 
 Template.userList.onCreated(function () {
@@ -7,7 +8,7 @@ Template.userList.onCreated(function () {
         console.log(users);
     });
 });
-  
+
 Template.userList.helpers({
     onlineUsers() {
         return Meteor.users.find({
@@ -29,5 +30,22 @@ Template.userList.helpers({
             "status.online": false
         }).count();
     }
+});
+
+
+Template.userListItem.onRendered(function () {
+    const user = this.data;
+    const selector = `#${user._id}`;
+    const userATagElement = $(selector);
+    const content = Blaze.toHTMLWithData(Template.userPopoverContent, user);
+    
+    console.log(user);
+    userATagElement.popover({
+        content: content,
+        title: user.username,
+        placement: "left",
+        html: true,
+        sanitize: false,
+    });
 });
   

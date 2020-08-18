@@ -7,7 +7,8 @@
             <span class="badge badge-success">{{onlineCount}}</span>
         </h6>
         {{#each onlineUsers}}
-            <div class="white-text row m-0">{{username}}</div>
+            <!-- <div class="white-text row m-0">{{username}}</div> -->
+            {{> userListItem}}
         {{/each}}   
     </div>
     
@@ -17,8 +18,22 @@
             <span class="badge badge-secondary">{{offlineCount}}</span>
         </h6>
         {{#each offlineUsers}}
-            <div class="greyple-text row m-0">{{username}}</div>
+            {{> userListItem}}
         {{/each}}
     </div>
     
+</template>
+
+<template name="userListItem">
+    <div class="row m-0 mt-1">
+        <button id="{{_id}}" type="button" class="btn btn-sm btn-secondary" data-toggle="popover">
+            {{username}}
+        </button>
+    </div>
+</template>
+
+<template name="userPopoverContent">
+    <div>
+        <input type="text" class="full-width white-text no-border form-control-sm greyple">
+    </div>
 </template>
