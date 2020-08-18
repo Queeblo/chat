@@ -7,10 +7,16 @@
             <span class="material-icons" >more_vert</span>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item flex" data-copy-message>
+              <span class="material-icons">content_copy</span>
+              Copy Message
+            </button>
+            {{#if canDelete}}
             <button class="dropdown-item flex" data-delete-message>
               <span class="material-icons">delete</span>
               Delete
             </button>
+            {{/if}}
           </div>
         </div>
         

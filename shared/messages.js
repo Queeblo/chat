@@ -13,6 +13,7 @@ Meteor.methods({
         console.log(`addMessage: ${message.userId} ${message.text}`);
     },
     removeMessage(messageId){
-        Messages.remove({_id: messageId});
+        const userId = this.userId;
+        return Messages.remove({_id: messageId, userId: userId});
     }
 });

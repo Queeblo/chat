@@ -26,12 +26,25 @@ Template.messageList.onCreated(function () {
     formatDate() {
       const message = this;
       return moment(message.date).format('ddd MMM Do h:mm A')
+    },
+    canDelete() {
+      const message = this;
+      const userId = Meteor.userId();
+      const isMessageOwner = userId === message.userId;
+      return isMessageOwner;
     }
   });
 
   Template.messageList.events({
     'click [data-delete-message]'(event, instance){
       const message = this;
-      Meteor.call('removeMessage', message._id)
+      Meteor.call('removeMessage', message._id, (error, result) => {
+        console.log(error, result);
+      })
     },
+    'click [data-copy-message]'(event, instance){
+      const message = this;
+      navigator.clipboard.writeText(message.text);
+    },
+    
   });
