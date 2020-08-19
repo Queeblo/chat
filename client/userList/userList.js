@@ -33,19 +33,5 @@ Template.userList.helpers({
 });
 
 
-Template.userListItem.onRendered(function () {
-    const user = this.data;
-    const selector = `#${user._id}`;
-    const userATagElement = $(selector);
-    const content = Blaze.toHTMLWithData(Template.userPopoverContent, user);
-    
-    console.log(user);
-    userATagElement.popover({
-        content: content,
-        title: user.username,
-        placement: "left",
-        html: true,
-        sanitize: false,
-    });
-});
+
   
