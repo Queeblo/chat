@@ -2,6 +2,7 @@
  * ssh root@167.172.152.55
  * http://meteor-up.com/docs.html
  * mup deploy --settings=../settings.json
+ * docker exec -it mongodb mongo chat
  */
 module.exports = {
   servers: {
