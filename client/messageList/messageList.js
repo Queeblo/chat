@@ -16,7 +16,7 @@ Template.messageList.onCreated(function () {
   
   Template.messageList.helpers({
     messages() {
-      return Messages.find();
+      return Messages.find({}, {sort: {date: 1}});
     },
     username() {
       const message = this;
