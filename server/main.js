@@ -6,10 +6,12 @@ import '../shared/accounts.js';
 
 const defaultChannels = [
   {
-      name: "General"
+      name: "General",
+      type: "public"
   },
   {
-      name: "Off-Topic"
+      name: "Off-Topic",
+      type: "public"
   }
 ];
 
@@ -22,7 +24,7 @@ Meteor.startup(() => {
       });
     
   }
-  // Messages.remove({})
+  //Channels.remove({})
   console.log(Channels.find().fetch())
 });
 
