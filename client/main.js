@@ -9,4 +9,5 @@ import './messageList/messageList.js';
 import './userList/userList.js';
 import './currentUserListItem/currentUserListItem.js';
 import './channelList/channelList.js';
+import './userListItem/userListItem.js';
 import './main.html';
