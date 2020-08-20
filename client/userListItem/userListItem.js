@@ -11,6 +11,15 @@ Template.userListItem.onRendered(function () {
         Blaze.renderWithData(Template.userPopoverContent, user, parentNode);
     });
 
+    $(selector).on('shown.bs.popover', function () {
+        const clickListener = function(event) {
+            if(event.target.closest('.popover')) return;
+            $(selector).popover('hide');
+            document.removeEventListener("click", clickListener);
+        };
+        document.addEventListener("click", clickListener);
+    });
+
     $(selector).popover({
         content: `<div id="popover-${user._id}"></div>`,
         title: user.username,
