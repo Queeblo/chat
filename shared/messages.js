@@ -1,35 +1,41 @@
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
-import { Channels } from '../shared/channels.js';
+import {Channels} from '../shared/channels.js';
+
 export const Messages = new Mongo.Collection('messages');
 
 
 Meteor.methods({
-    addMessage(message){
-        if(!message || message.text === ''){
+    addMessage(message) {
+        if (!message || message.text === '') {
             throw new Meteor.Error('pants-not-found', "Can't find my pants");
-        } 
+        }
         //console.log(typeof message.text);
         const id = Messages.insert(message);
         console.log(`addMessage: ${message.userId} ${message.text}`);
     },
-    removeMessage(messageId){
+    removeMessage(messageId) {
         const userId = this.userId;
-        return Messages.remove({_id: messageId, userId: userId});
+        const isAdmin = Roles.userIsInRole(userId, 'super-admin');
+        if (isAdmin) {
+            return Messages.remove({_id: messageId});
+        } else {
+            return Messages.remove({_id: messageId, userId: userId});
+        }
     },
-    addDirectMessage(message, messagedUserId){
+    addDirectMessage(message, messagedUserId) {
         const userIds = [message.userId, messagedUserId];
         const channel = Channels.findOne({userIds: {$all: userIds}});
         let channelId = null;
         console.log(userIds, channel);
-        if(!channel){
+        if (!channel) {
             const users = Meteor.users.find(
                 {_id: {$in: userIds}},
                 {fields: {username: 1}}
-                ).fetch();
+            ).fetch();
             console.log(users);
             let combinedUsernames = '';
-            users.forEach(function (user){
+            users.forEach(function (user) {
                 combinedUsernames = `${combinedUsernames} ${user.username}`;
             })
             channelId = Channels.insert({
@@ -37,7 +43,7 @@ Meteor.methods({
                 type: 'direct',
                 userIds: userIds,
             })
-        }else{
+        } else {
             channelId = channel._id;
         }
         Meteor.users.update(message.userId, {$set: {'profile.activeChannel': channelId}});

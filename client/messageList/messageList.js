@@ -31,7 +31,8 @@ Template.messageList.onCreated(function () {
       const message = this;
       const userId = Meteor.userId();
       const isMessageOwner = userId === message.userId;
-      return isMessageOwner;
+      const isAdmin = Roles.userIsInRole(userId, 'super-admin');
+      return isAdmin || isMessageOwner;
     }
   });
 
