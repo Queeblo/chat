@@ -1,9 +1,26 @@
 <template name="channelList">
-    <div class="list-group">
-        {{#each channels}}
-            <button data-channel type="button" class="list-group-item list-group-item-action btn-sm rounded-0 {{active}}">
-                {{name}}
-            </button>
-        {{/each}}   
+    <button class="btn btn-primary btn-dark full-width rounded-0" type="button" data-toggle="collapse" data-target="#publicChannels" aria-expanded="true" aria-controls="collapseExample">
+        Channels
+    </button>
+    <div class="collapse show" id="publicChannels">
+        <div class="list-group">
+            {{#each publicChannels}}
+                <button data-channel type="button" class="list-group-item list-group-item-action btn-sm rounded-0 {{active}}">
+                    {{name}}
+                </button>
+            {{/each}}
+        </div>
+    </div>
+    <button class="btn btn-primary btn-dark full-width rounded-0" type="button" data-toggle="collapse" data-target="#directChannels" aria-expanded="true" aria-controls="collapseExample">
+        Direct Messages
+    </button>
+    <div class="collapse show" id="directChannels">
+        <div class="list-group">
+            {{#each directChannels}}
+                <button data-channel type="button" class="list-group-item list-group-item-action btn-sm rounded-0 {{active}}">
+                    {{name}}
+                </button>
+            {{/each}}
+        </div>
     </div>
 </template>

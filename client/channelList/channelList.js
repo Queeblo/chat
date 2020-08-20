@@ -7,9 +7,12 @@ Template.channelList.onCreated(function () {
   });
 
   Template.channelList.helpers({
-    channels() {
-      return Channels.find();
+    publicChannels() {
+      return Channels.find({type: 'public'});
     },
+      directChannels() {
+          return Channels.find({type: 'direct'});
+      },
     active() {
         const channel = this;
         const user = Meteor.user();
@@ -31,7 +34,7 @@ Template.channelList.onCreated(function () {
           console.log(error);
           alert(error.reason);
         }else{
-          console.log(result);
+          //console.log(result);
         }
       });
     },
