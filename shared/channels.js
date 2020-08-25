@@ -1,4 +1,5 @@
 import {Mongo} from 'meteor/mongo';
+import {Messages} from "./messages";
 export const Channels = new Mongo.Collection('channels');
 
 Meteor.methods({
@@ -10,5 +11,15 @@ Meteor.methods({
         return Meteor.users.update(userId, {
             $set: {profile: profile}
         });
+    },
+    removeChannel(channelId) {
+        console.log('log');
+        const userId = this.userId;
+        const isAdmin = Roles.userIsInRole(userId, 'super-admin');
+        if (isAdmin) {
+            return Channels.remove({_id: channelId});
+        } else {
+            //return Channels.remove({_id: channelId, userId: userId});
+        }
     },
 });

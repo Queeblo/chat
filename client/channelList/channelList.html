@@ -1,12 +1,21 @@
 <template name="channelList">
     <button class="btn btn-primary btn-dark full-width rounded-0" type="button" data-toggle="collapse" data-target="#publicChannels" aria-expanded="true" aria-controls="collapseExample">
         Channels
+        {{#if isInRole 'super-admin'}}
+            <span class="material-icons float-right" data-add-channel>
+                add_circle_outline
+            </span>
+        {{/if}}
+
     </button>
     <div class="collapse show" id="publicChannels">
         <div class="list-group">
             {{#each publicChannels}}
                 <button data-channel type="button" class="list-group-item list-group-item-action btn-sm rounded-0 {{active}}">
                     {{name}}
+                    {{#if isInRole 'super-admin'}}
+                        <span class="material-icons float-right" data-delete-channel>delete</span>
+                    {{/if}}
                 </button>
             {{/each}}
         </div>
@@ -19,6 +28,7 @@
             {{#each directChannels}}
                 <button data-channel type="button" class="list-group-item list-group-item-action btn-sm rounded-0 {{active}}">
                     {{name}}
+                    <span class="material-icons float-right" data-delete-channel>delete</span>
                 </button>
             {{/each}}
         </div>
