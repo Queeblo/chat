@@ -8,16 +8,11 @@ Template.addChannelModal.events({
         event.preventDefault();
         const input = instance.find('input');
         const text = input.value;
-        const date = new Date();
-        const user = Meteor.user();
-        input.value = '';
-        const message = {
-            text: text,
-            userId: Meteor.userId(),
-            date: date.toISOString(),
-            channelId: user.profile.activeChannel
+        const channel = {
+            name: text,
+            type: 'public',
         };
-        Meteor.call("addMessage", message, function(error, result){
+        Meteor.call("addChannel", channel, function(error, result){
             if(error){
                 console.log(error);
                 alert(error.reason);
@@ -25,5 +20,6 @@ Template.addChannelModal.events({
                 console.log(result);
             }
         });
+        Modal.close();
     },
 });
