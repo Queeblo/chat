@@ -52,7 +52,9 @@ Template.channelList.events({
                 console.log(error);
                 alert(error.reason);
             } else {
-                //console.log(result);
+                const removedText = `Messages removed: ${result.removedMessageCount}`
+                console.log(result);
+                alert(removedText)
             }
         })
     },
