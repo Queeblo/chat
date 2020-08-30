@@ -25,7 +25,21 @@ Meteor.methods({
     },
     addDirectMessage(message, messagedUserId) {
         const userIds = [message.userId, messagedUserId];
-        const channel = Channels.findOne({userIds: {$all: userIds}});
+        let channel = Channels.findOne({userIds: {$all: [userIds]}});
+        if (!channel){
+            channel = Channels.findOne({
+                userIds: {$all: [messagedUserId]},
+                inactiveUserIds: {$all: [message.userId]}
+            });
+            if (channel){
+                Channels.update({_id: channel._id},{
+                    $pull: {inactiveUserIds: message.userId},
+                    $push: {userIds: message.userId}
+                });
+            }
+        }
+
+
         let channelId = null;
         console.log(userIds, channel);
         if (!channel) {
