@@ -16,22 +16,27 @@ Meteor.methods({
     removeChannel(channelId) {
         const userId = this.userId;
         const isAdmin = Roles.userIsInRole(userId, 'super-admin');
+        let removedMessageCount = 0;
+        let removedChannelsCount = 0;
         if (isAdmin) {
-            const removedChannelsCount = Channels.remove({_id: channelId});
-            const removedMessageCount = Messages.remove({channelId: channelId});
+             removedChannelsCount = Channels.remove({_id: channelId});
+             removedMessageCount = Messages.remove({channelId: channelId});
             return {
                 removedMessageCount: removedMessageCount,
                 removedChannelsCount: removedChannelsCount,
             };
         } else {
-            Channels.update({_id: channelId},{
-                $pull: {userIds: userId},
-                $push: {inactiveUserIds: userId}
-            });
             const publicChannel = Channels.findOne({type: 'public'});
-            Meteor.users.update(userId, {$set: {'profile.activeChannel': publicChannel._id}});
-            //return Channels.remove({_id: channelId, userId: userId});
+             removedChannelsCount = Channels.remove({_id: channelId, userIds: userId});
+            if (removedChannelsCount === 1) {
+                removedMessageCount = Messages.remove({channelId: channelId});
+                Meteor.users.update(userId, {$set: {'profile.activeChannel': publicChannel._id}});
+            }
         }
+        return {
+            removedMessageCount: removedMessageCount,
+            removedChannelsCount: removedChannelsCount,
+        };
     },
     addChannel(channel) {
         const userId = this.userId;

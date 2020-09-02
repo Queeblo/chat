@@ -5,7 +5,7 @@ import './channelList.html';
 
 Template.channelList.onCreated(function () {
     const instance = this;
-    instance.subscribe('channelschannels');
+    instance.subscribe('channels');
 });
 
 Template.channelList.helpers({

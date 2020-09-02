@@ -31,6 +31,7 @@ Meteor.startup(() => {
     if(superAdmin){
         console.log(Roles.userIsInRole(superAdmin._id, 'super-admin'));
     }
+
 });
 
 Meteor.methods({
