@@ -51,4 +51,35 @@ Template.messageInput.onCreated(function () {
         }
       });
     },
+    'click [data-file-button]'(event, instance){
+      const input = instance.find('#file-input');
+      const user = Meteor.user();
+      input.addEventListener('change', (event) => {
+        const fileList = event.target.files;
+        const file = fileList[0];
+        console.log(fileList);
+        const reader = new FileReader();
+        reader.addEventListener('load', (loadEvent) => {
+          console.log(loadEvent);
+          //img.src = event.target.result;
+          const date = new Date();
+          const message = {
+            imgSrc: loadEvent.target.result,
+            userId: Meteor.userId(),
+            date: date.toISOString(),
+            channelId: user.profile.activeChannel
+          };
+          Meteor.call("addMessage", message, function(error, result){
+            if(error){
+              console.log(error);
+              alert(error.reason);
+            }else{
+              console.log(result);
+            }
+          });
+        });
+        reader.readAsDataURL(file);
+      });
+      input.click();
+    },
   });

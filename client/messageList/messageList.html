@@ -23,7 +23,11 @@
         {{username}}&nbsp;<span class="greyple-text sm-text">{{formatDate}}</span>
       </div>
       <div class="white-text row m-0">
-        {{text}}
+          {{#if imgSrc}}
+              <img class="mw-100" src="{{imgSrc}}">
+          {{else}}
+              {{text}}
+          {{/if}}
       </div>
     </div>
     {{/each}}

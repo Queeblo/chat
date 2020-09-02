@@ -1,12 +1,20 @@
 <template name="messageInput">
     <form class="full-width">
-      <div class="row full-width">
-        <div class="col-10 full-width">
-          <input type="text" class="full-width white-text no-border form-control-sm greyple">
+        <div class="row full-width">
+            <div class="col-10 full-width">
+                <input type="text" class="full-width white-text no-border form-control-sm greyple">
+            </div>
+            <div class="col-1">
+                <button data-file-button type="button" class="btn btn-sm btn-secondary">
+                    <span class="material-icons float-right" data-add-channel>
+                        add_circle_outline
+                    </span>
+                </button>
+                <input id="file-input" type="file" class="invisible position-absolute" accept=".jpg, .jpeg, .png">
+            </div>
+            <div class="col-1">
+                <button {{disabled}} type="submit" class="btn btn-sm btn-secondary">Send</button>
+            </div>
         </div>
-        <div class="col-2">
-          <button {{disabled}} type="submit" class="btn btn-sm btn-secondary">Send</button>
-        </div>
-      </div>
     </form>
-  </template>
+</template>
