@@ -18,6 +18,15 @@ body {
   overflow-y: auto;
   height: calc(100% - 50px);
 }
+.message-list-wrapper div.col {
+  transform: rotate(180deg);
+  direction: rtl;
+}
+
+.message {
+  transform: rotate(180deg);
+  direction: ltr;
+}
 
 .border-bottom {
   border-bottom: 1px solid var(--greyple);
