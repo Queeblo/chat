@@ -2,6 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {Messages} from '/shared/messages.js';
 import {Channels} from '../shared/channels.js';
 import {Accounts} from 'meteor/accounts-base';
+import './dummyData.js';
 import '../shared/accounts.js';
 // https://atmospherejs.com/alanning/roles#roles-docs
 const defaultChannels = [
@@ -25,7 +26,7 @@ Meteor.startup(() => {
 
     }
     //Channels.remove({})
-    console.log(Channels.find().fetch())
+    // console.log(Channels.find().fetch())
     Roles.createRole('super-admin', {unlessExists: true})
     const superAdmin = Meteor.users.findOne({username: 'HankHill'});
     if(superAdmin){
@@ -64,7 +65,6 @@ Meteor.publish('users', function () {
 
 Meteor.publish('channels', function () {
     const userId = this.userId;
-    console.log(userId);
     // {type: 'public'}
     //{userIds: userId}
     return Channels.find({$or: [{type: 'public'}, {userIds: userId}]});
