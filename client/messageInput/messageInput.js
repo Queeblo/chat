@@ -3,6 +3,26 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './messageInput.html';
 
+function addMessage(content) {
+  const date = new Date();
+  const user = Meteor.user();
+  const message = Object.assign({
+    userId: Meteor.userId(),
+    date: date.toISOString(),
+    channelId: user.profile.activeChannel
+  }, content);
+  console.log(message);
+  Meteor.call("addMessage", message, function(error, result){
+    if(error){
+      console.log(error);
+      alert(error.reason);
+    }else{
+      console.log(result);
+      const listWrapper = document.querySelector('.message-list-wrapper');
+      listWrapper.scrollTop = listWrapper.scrollHeight;
+    }
+  });
+}
 
 Template.messageInput.onCreated(function () {
     const instance = this;
@@ -33,27 +53,11 @@ Template.messageInput.onCreated(function () {
       event.preventDefault();
       const input = instance.find('input');
       const text = input.value;
-      const date = new Date();
-      const user = Meteor.user();
       input.value = '';
-      const message = {
-        text: text,
-        userId: Meteor.userId(),
-        date: date.toISOString(),
-        channelId: user.profile.activeChannel
-      };
-      Meteor.call("addMessage", message, function(error, result){
-        if(error){
-          console.log(error);
-          alert(error.reason);
-        }else{
-          console.log(result);
-        }
-      });
+      addMessage({text: text});
     },
     'click [data-file-button]'(event, instance){
       const input = instance.find('#file-input');
-      const user = Meteor.user();
       input.addEventListener('change', (event) => {
         const fileList = event.target.files;
         const file = fileList[0];
@@ -61,22 +65,8 @@ Template.messageInput.onCreated(function () {
         const reader = new FileReader();
         reader.addEventListener('load', (loadEvent) => {
           console.log(loadEvent);
-          //img.src = event.target.result;
-          const date = new Date();
-          const message = {
-            imgSrc: loadEvent.target.result,
-            userId: Meteor.userId(),
-            date: date.toISOString(),
-            channelId: user.profile.activeChannel
-          };
-          Meteor.call("addMessage", message, function(error, result){
-            if(error){
-              console.log(error);
-              alert(error.reason);
-            }else{
-              console.log(result);
-            }
-          });
+          const imgSrc = loadEvent.target.result;
+          addMessage({imgSrc: imgSrc});
         });
         reader.readAsDataURL(file);
       });
