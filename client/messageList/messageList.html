@@ -1,34 +1,40 @@
 <template name="messageList">
-    {{#each messages}}
-    <div class="message white-text row m-0 border-top p-10">
-      <div class="white-text row m-0">
-        <div class="dropdown dropleft" style="position:absolute; right: 20px;">
-          <button class="btn btn-secondary dbnb no-border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="material-icons" >more_vert</span>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <button class="dropdown-item flex" data-copy-message>
-              <span class="material-icons">content_copy</span>
-              Copy Message
-            </button>
-            {{#if canDelete}}
-            <button class="dropdown-item flex" data-delete-message>
-              <span class="material-icons">delete</span>
-              Delete
-            </button>
-            {{/if}}
-          </div>
+    <div class="row p-10 message-list-wrapper full-width">
+        <div class="col">
+            {{#each messages}}
+                <div class="message white-text row m-0 border-top p-10">
+                    <div class="white-text row m-0">
+                        <div class="dropdown dropleft" style="position:absolute; right: 20px;">
+                            <button class="btn btn-secondary dbnb no-border" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="material-icons">more_vert</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item flex" data-copy-message>
+                                    <span class="material-icons">content_copy</span>
+                                    Copy Message
+                                </button>
+                                {{#if canDelete}}
+                                    <button class="dropdown-item flex" data-delete-message>
+                                        <span class="material-icons">delete</span>
+                                        Delete
+                                    </button>
+                                {{/if}}
+                            </div>
+                        </div>
+
+                        {{username}}&nbsp;<span class="greyple-text sm-text">{{formatDate}}</span>
+                    </div>
+                    <div class="white-text row m-0">
+                        {{#if imgSrc}}
+                            <img class="mw-100" src="{{imgSrc}}">
+                        {{else}}
+                            {{text}}
+                        {{/if}}
+                    </div>
+                </div>
+            {{/each}}
+            <button data-load-more class="message btn-secondary">Load More</button>
         </div>
-        
-        {{username}}&nbsp;<span class="greyple-text sm-text">{{formatDate}}</span>
-      </div>
-      <div class="white-text row m-0">
-          {{#if imgSrc}}
-              <img class="mw-100" src="{{imgSrc}}">
-          {{else}}
-              {{text}}
-          {{/if}}
-      </div>
     </div>
-    {{/each}}
-  </template>
+</template>

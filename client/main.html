@@ -1,35 +1,31 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <title>chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>chat</title>
 </head>
 
 <body>
-    <div class="row full-height m-0">
-      <div class="col-2 nqb p-0">
+<div class="row full-height m-0">
+    <div class="col-2 nqb p-0">
         {{> channelList}}
         {{> currentUserListItem}}
-      </div>
-      <div class="col-8 dbnb">
-      {{#if currentUser}}
-        <div class="row p-10 message-list-wrapper full-width">
-          <div class="col">
-            {{> messageList}}
-          </div>
-        </div>
-        <div class="row pin-bottom full-width p-10">
-          {{> messageInput}}
-        </div>
-      {{else}}
-        {{> signUp}}
-      {{/if}}
-        
-      </div>
-      <div class="col-2 nqb">
-        {{> userList}}
-      </div>
     </div>
-  {{> modal}}
+    <div class="col-8 dbnb">
+        {{#if currentUser}}
+            {{> messageList}}
+            <div class="row pin-bottom full-width p-10">
+                {{> messageInput}}
+            </div>
+        {{else}}
+            {{> signUp}}
+        {{/if}}
+
+    </div>
+    <div class="col-2 nqb">
+        {{> userList}}
+    </div>
+</div>
+{{> modal}}
 </body>
 
 
