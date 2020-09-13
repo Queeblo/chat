@@ -55,8 +55,9 @@ Meteor.methods({
     }
 })
 
-Meteor.publish('messages', function (channelId) {
-    return Messages.find({channelId: channelId});
+Meteor.publish('messages', function (channelId, limit) {
+    limit = limit ? limit : 25;
+    return Messages.find({channelId: channelId}, {sort: {date: -1}, limit: limit});
 });
 
 Meteor.publish('users', function () {
